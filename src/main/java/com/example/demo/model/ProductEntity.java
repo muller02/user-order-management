@@ -4,6 +4,7 @@ import com.example.demo.dto.ProductDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,10 +17,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-// @Table(name = "product");
+@Table(name = "product")
 public class ProductEntity {
     
-    // @Id
+    @Id
     String productId;
     String productName;
     Integer productPrice;

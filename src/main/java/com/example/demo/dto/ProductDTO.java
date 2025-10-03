@@ -1,17 +1,17 @@
 package com.example.demo.dto;
 
+import com.example.demo.model.ProductEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Builder
 public class ProductDTO {
     
@@ -19,4 +19,13 @@ public class ProductDTO {
     String productName;
     Integer productPrice;
     Integer productStock;
+
+    public ProductEntity toEntity(){
+        return ProductEntity.builder()
+                .productId(this.productId)
+                .productName(this.productName)
+                .productPrice(this.productPrice)
+                .productStock(this.productStock)
+                .build();
+    }
 }
