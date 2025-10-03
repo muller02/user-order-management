@@ -1,12 +1,8 @@
 spring:
     application:
         name : demo
-    autoconfigure:
-        exclude:
-            org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
-
-server:
-  port: 8080
+    profiles:
+        active: dev
 
 logging:
   level:
