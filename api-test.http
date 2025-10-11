@@ -1,0 +1,13 @@
+### POST Product 생성
+POST http://localhost:8080/api/v1/product
+Content-Type: application/json
+
+{
+  "productName": "테스트 상품",
+  "productPrice": 10000,
+  "productStock": 50
+}
+
+### GET 단일 Product 조회
+GET http://localhost:8080/api/v1/product/1
+Accept: application/json
