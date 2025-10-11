@@ -1,16 +1,26 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.dto.ProductDTO;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.entity.Product;
+import com.example.demo.repository.ProductRepository;
 import com.example.demo.service.ProductService;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
-    @Override
-    public void saveProduct() {
-        
+
+    private final ProductRepository productRepository;
+
+   @Override
+   public Product createProduct(Product product) {
+        return productRepository.save(product);
     }
-    
+
     @Override
-    public ProductDTO getProduct(String productIds) {
-        return null;
+    public Product getProductById(Long productId) {
+        return productRepository.findByProductId(productId);
     }
 }
