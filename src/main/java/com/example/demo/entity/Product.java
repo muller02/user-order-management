@@ -3,17 +3,17 @@ package com.example.demo.entity;
 import com.example.demo.dto.ProductDTO;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -21,10 +21,11 @@ import lombok.NoArgsConstructor;
 public class Product {
     
     @Id
-    String productId;
-    String productName;
-    Integer productPrice;
-    Integer productStock;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long productId;
+    private String productName;
+    private Integer productPrice;
+    private Integer productStock;
 
     public ProductDTO toDto(){
         return ProductDTO.builder()

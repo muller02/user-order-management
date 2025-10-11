@@ -1,6 +1,6 @@
 package com.example.demo.dto;
 
-import com.example.demo.model.ProductEntity;
+import com.example.demo.entity.Product;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,15 +13,16 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Builder
+//TODO: Change class to Record class
 public class ProductDTO {
     
-    String productId;
-    String productName;
-    Integer productPrice;
-    Integer productStock;
+    private Long productId;
+    private String productName;
+    private Integer productPrice;
+    private Integer productStock;
 
-    public ProductEntity toEntity(){
-        return ProductEntity.builder()
+    public Product toEntity(){
+        return Product.builder()
                 .productId(this.productId)
                 .productName(this.productName)
                 .productPrice(this.productPrice)
