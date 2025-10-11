@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.example.demo.entity;
 
 import com.example.demo.dto.ProductDTO;
 
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Table(name = "product")
-public class ProductEntity {
+public class Product {
     
     @Id
     String productId;
