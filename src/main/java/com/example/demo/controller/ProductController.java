@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -24,6 +27,30 @@ public class ProductController {
         Spring 4.3 이상부터는 @Autowired 생략 가능
     */ 
     private final ProductService productService;
+
+    @GetMapping("/all")
+        public List<ProductDTO> getAllProducts() {
+        List<Product> products = productService.getAllProducts();
+        return products.stream()
+                .map(product -> new ProductDTO(
+                        product.getProductId(),
+                        product.getProductName(),
+                        product.getProductPrice(),
+                        product.getProductStock()))
+                .toList();
+    }
+
+        @GetMapping("/{id}")
+    public ProductDTO getProduct(@PathVariable("id") Long productId) {
+        
+        //TODO: Not Found Exception 처리 필요
+        Product product = productService.getProductById(productId);
+
+        return new ProductDTO(product.getProductId(), 
+                                product.getProductName(),
+                                product.getProductPrice(), 
+                                product.getProductStock());
+    }
 
     //TODO: Response객체로 return 필요
     @PostMapping
@@ -44,17 +71,5 @@ public class ProductController {
                                 saved.getProductName(),
                                 saved.getProductPrice(), 
                                 saved.getProductStock());
-    }
-    
-    @GetMapping("/{id}")
-    public ProductDTO getProduct(@PathVariable("id") Long productId) {
-        
-        //TODO: Not Found Exception 처리 필요
-        Product product = productService.getProductById(productId);
-
-        return new ProductDTO(product.getProductId(), 
-                                product.getProductName(),
-                                product.getProductPrice(), 
-                                product.getProductStock());
     }
 }
