@@ -58,9 +58,9 @@ public class ProductController {
 
         // DTO -> Entity
         Product product = Product.builder()
-            .productName(productDTO.getProductName())
-            .productPrice(productDTO.getProductPrice())
-            .productStock(productDTO.getProductStock())
+            .productName(productDTO.productName())
+            .productPrice(productDTO.productPrice())
+            .productStock(productDTO.productStock())
             .build();
 
         // 저장된 Product Entity 반환
