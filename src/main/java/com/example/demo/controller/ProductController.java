@@ -16,6 +16,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/v1/product")
@@ -42,20 +43,13 @@ public class ProductController {
 
         @GetMapping("/{id}")
     public ProductDTO getProduct(@PathVariable("id") Long productId) {
-        
-        //TODO: Not Found Exception 처리 필요
-        Product product = productService.getProductById(productId);
-
-        return new ProductDTO(product.getProductId(), 
-                                product.getProductName(),
-                                product.getProductPrice(), 
-                                product.getProductStock());
+        ProductDTO productDTO = productService.getProductById(productId);
+        return productDTO;
     }
 
     //TODO: Response객체로 return 필요
     @PostMapping
     public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
-
         // DTO -> Entity
         Product product = Product.builder()
             .productName(productDTO.productName())
@@ -71,5 +65,11 @@ public class ProductController {
                                 saved.getProductName(),
                                 saved.getProductPrice(), 
                                 saved.getProductStock());
+    }
+
+    @PutMapping("/{id}")
+    public ProductDTO updateProduct(@PathVariable("id") Long productId, @RequestBody ProductDTO productDTO) {
+        ProductDTO updated = productService.updateProduct(productId, productDTO);
+        return updated;
     }
 }
