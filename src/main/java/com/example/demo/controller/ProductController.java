@@ -32,6 +32,7 @@ public class ProductController {
     */ 
     private final ProductService productService;
 
+    // 전체 조회
     @GetMapping("/all")
         public List<ProductDTO> getAllProducts() {
         List<Product> products = productService.getAllProducts();
@@ -44,13 +45,15 @@ public class ProductController {
                 .toList();
     }
 
-        @GetMapping("/{id}")
+    // 단건 조회
+    @GetMapping("/{id}")
     public ProductDTO getProduct(@PathVariable("id") Long productId) {
         ProductDTO productDTO = productService.getProductById(productId);
         return productDTO;
     }
 
     //TODO: Response객체로 return 필요
+    // 등록
     @PostMapping
     public ProductDTO createProduct(@RequestBody ProductDTO productDTO) {
         // DTO -> Entity
@@ -70,17 +73,20 @@ public class ProductController {
                                 saved.getProductStock());
     }
 
+    // 전체 수정
     @PutMapping("/{id}")
     public ProductDTO updateProduct(@PathVariable("id") Long productId, @RequestBody ProductDTO productDTO) {
         ProductDTO updated = productService.updateProduct(productId, productDTO);
         return updated;
     }
 
+    // 단건 삭제
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable("id") Long productId) {
         productService.deleteProduct(productId);
     }
 
+    // 부분 수정
     @PatchMapping("/{id}")
     public ProductDTO updateProduct(@PathVariable("id") Long productId, @RequestBody ProductPatchDTO patchDTO) {
         ProductDTO updated = productService.updateProduct(productId, patchDTO);
