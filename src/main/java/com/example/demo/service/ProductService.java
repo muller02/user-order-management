@@ -10,4 +10,5 @@ public interface ProductService {
     public ProductDTO getProductById(Long productId);
     public Product createProduct(Product product);
     public ProductDTO updateProduct(Long productId, ProductDTO productDTO);
+    public void deleteProduct(Long productId);
 }
