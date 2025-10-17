@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.ProductDTO;
+import com.example.demo.dto.ProductPatchDTO;
 import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -77,5 +79,11 @@ public class ProductController {
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable("id") Long productId) {
         productService.deleteProduct(productId);
+    }
+
+    @PatchMapping("/{id}")
+    public ProductDTO updateProduct(@PathVariable("id") Long productId, @RequestBody ProductPatchDTO patchDTO) {
+        ProductDTO updated = productService.updateProduct(productId, patchDTO);
+        return updated;
     }
 }
