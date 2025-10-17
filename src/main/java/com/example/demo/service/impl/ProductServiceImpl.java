@@ -54,4 +54,14 @@ public class ProductServiceImpl implements ProductService {
 
        return existingProduct.toDto();
     }
+    @Override
+    @Transactional
+    public void deleteProduct(Long productId) {
+        // Check if the product exists
+        // 삭제 후 영향 받은 row 체크도 가능 => int deletedCount = productRepository.deleteByProductId(productId);
+        Product existingProduct = productRepository.findByProductId(productId)
+                .orElseThrow(() -> new RuntimeException("product not found => " + productId));
+
+        productRepository.delete(existingProduct);
+    }
 }
