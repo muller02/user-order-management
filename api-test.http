@@ -1,17 +1,47 @@
-### GET 전체 Product 조회
-GET http://localhost:8080/api/v1/product/all
-Accept: application/json
-
-### GET 단일 Product 조회
-GET http://localhost:8080/api/v1/product/1
-Accept: application/json
-
-### POST Product 생성
+### 1️⃣ Product 생성 (POST)
 POST http://localhost:8080/api/v1/product
 Content-Type: application/json
 
 {
-  "productName": "테스트 상품",
-  "productPrice": 10000,
-  "productStock": 50
+  "id": 1,
+  "name": "샘플상품13",
+  "price": 15000,
+  "description": "테스트용 샘플 상품입니다.",
+  "stock": 100,
+  "status": "AVAILABLE",
+  "createdBy": 1
 }
+
+### 2️⃣ Product 전체 조회 (GET)
+GET http://localhost:8080/api/v1/product/all
+Content-Type : application/json
+
+### 3️⃣ Product 단건 조회 (GET)
+GET http://localhost:8080/api/v1/product/2
+Content-Type :  application/json
+
+### 4️⃣ Product 전체 수정 (PUT)
+PUT http://localhost:8080/api/v1/product/2
+Content-Type: application/json
+
+{
+  "name": "수정상품",
+  "price": 12000,
+  "description": "수정된 상품 설명",
+  "stock": 30,
+  "status": "SOLD_OUT",
+  "createdById": 1
+}
+
+### 5️⃣ Product 부분 수정 (PATCH)
+PATCH http://localhost:8080/api/v1/product/2
+Content-Type: application/json
+
+{
+  "price": 15000,
+  "stock": 20
+}
+
+### 6️⃣ Product 삭제 (DELETE)
+DELETE http://localhost:8080/api/v1/product/1
+Content-Type : application/json
