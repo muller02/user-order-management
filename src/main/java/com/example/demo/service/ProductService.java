@@ -2,17 +2,18 @@ package com.example.demo.service;
 
 import java.util.List;
 
-import com.example.demo.dto.ProductDTO;
+import com.example.demo.dto.ProductResponseDTO;
+import com.example.demo.dto.ProductCreateDTO;
 import com.example.demo.dto.ProductPatchDTO;
 import com.example.demo.entity.Product;
 
 public interface ProductService {
     public List<Product> getAllProducts();
-    public ProductDTO getProductById(Long productId);
-    public Product createProduct(Product product);
+    public ProductResponseDTO getById(Long idd);
+    public ProductResponseDTO create(ProductCreateDTO productCreateDTO);
     // PUT
-    public ProductDTO updateProduct(Long productId, ProductDTO productDTO);
+    public ProductResponseDTO update(Long id, ProductResponseDTO productDTO);
     // PATCH
-    public ProductDTO updateProduct(Long productId, ProductPatchDTO patchDTO);
-    public void deleteProduct(Long productId);
+    public ProductResponseDTO update(Long id, ProductPatchDTO patchDTO);
+    public void delete(Long id);
 }
