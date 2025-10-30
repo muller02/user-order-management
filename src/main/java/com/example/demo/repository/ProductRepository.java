@@ -8,7 +8,7 @@ import com.example.demo.entity.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAll();
-    Optional<Product> findByProductId(Long producId);
+    Optional<Product> findById(Long id);
     Product save(Product product);
     void delete(Product product);
 }

@@ -4,15 +4,19 @@ import java.time.LocalDateTime;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.example.demo.dto.ProductDTO;
+import com.example.demo.dto.ProductResponseDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Data;
@@ -20,6 +24,8 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
+// createdAt, updatedAt 자동 설정을 위한 Auditing 설정
+@EntityListeners(AuditingEntityListener.class)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -47,6 +53,7 @@ public class Product {
     // TODO: 관계 매핑 필요 ( ManyToOne )
     // private Category caregory;
 
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User createdBy;
 
@@ -64,13 +71,17 @@ public class Product {
     @Column(nullable = false)
     private Boolean isDeleted = false;
 
-    public ProductDTO toDto(){
-        return ProductDTO.builder()
+    public ProductResponseDTO toDto(){
+        return ProductResponseDTO.builder()
             .id(id)
             .name(name)
             .price(price)
             .description(description)
             .stock(stock)
+            .status(status.name())
+            .createdBy(createdBy != null ? createdBy.getName() : null)
+            .createdAt(createdAt != null ? createdAt.toString() : null)
+            .updatedAt(updatedAt != null ? updatedAt.toString() : null)
             .build();
     }
 }
