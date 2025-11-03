@@ -5,7 +5,6 @@ import com.example.demo.entity.ProductStatus;
 import com.example.demo.entity.User;
 
 import lombok.Builder;
-
 /*
  * Product 생성 시, createdBy 필드에 userId(Long) 필요
  */

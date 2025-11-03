@@ -4,7 +4,6 @@ import com.example.demo.entity.Product;
 import com.example.demo.entity.ProductStatus;
 
 import lombok.Builder;
-
 @Builder
 public record ProductResponseDTO(Long id, 
                         String name, 
