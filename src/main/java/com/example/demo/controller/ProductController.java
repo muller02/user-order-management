@@ -72,7 +72,8 @@ public class ProductController {
 
     // 전체 수정
     @PutMapping("/{id}")
-    public ProductResponseDTO updateProduct(@PathVariable("id") Long productId, @RequestBody ProductResponseDTO productDTO) {
+    public ProductResponseDTO updateProduct(@PathVariable("id") Long productId, 
+                                            @RequestBody ProductResponseDTO productDTO) {
         ProductResponseDTO updated = productService.update(productId, productDTO);
         return updated;
     }
@@ -86,7 +87,8 @@ public class ProductController {
 
     // 부분 수정
     @PatchMapping("/{id}")
-    public ProductResponseDTO updateProduct(@PathVariable("id") Long id, @RequestBody ProductPatchDTO patchDTO) {
+    public ProductResponseDTO updateProduct(@PathVariable("id") Long id, 
+                                            @RequestBody ProductPatchDTO patchDTO) {
         ProductResponseDTO updated = productService.update(id, patchDTO);
         return updated;
     }
