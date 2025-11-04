@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -36,6 +37,7 @@ public class ProductController {
     private final ProductService productService;
 
     // 전체 조회
+    @Transactional(readOnly = true)
     @GetMapping("/all")
         public List<ProductResponseDTO> getAllProducts() {
         List<Product> products = productService.getAllProducts();
@@ -54,6 +56,7 @@ public class ProductController {
     }
 
     // 단건 조회
+    @Transactional(readOnly = true)
     @GetMapping("/{id}")
     public ProductResponseDTO getProduct(@PathVariable("id") Long id) {
         ProductResponseDTO productDTO = productService.getById(id);
