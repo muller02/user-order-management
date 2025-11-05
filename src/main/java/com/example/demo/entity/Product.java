@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import java.time.LocalDateTime;
 
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SoftDelete;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -20,16 +22,21 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 // createdAt, updatedAt 자동 설정을 위한 Auditing 설정
 @EntityListeners(AuditingEntityListener.class)
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+// Soft Delete 설정
+@SQLDelete(sql = "UPDATE products SET is_deleted = true WHERE id = ?")
 @Table(name = "products")
 public class Product {
     
@@ -68,6 +75,7 @@ public class Product {
     private LocalDateTime updatedAt;
 
     // Soft Delete
+    @SoftDelete(columnName = "is_deleted")
     @Column(nullable = false)
     private Boolean isDeleted = false;
 
