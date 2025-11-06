@@ -29,7 +29,6 @@ public record ProductCreateDTO(Long id,
                 .stock(this.stock)
                 .status(ProductStatus.valueOf(this.status)) // Enum 변환
                 .createdBy(user)
-                .isDeleted(false)
                 .build();
     }
 } 
