@@ -36,8 +36,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 // Soft Delete 설정
-@SQLDelete(sql = "UPDATE products SET is_deleted = true WHERE id = ?")
+@SoftDelete(columnName = "is_deleted")
 @Table(name = "products")
+//TODO: 검색 필터 where = "is_deleted = false" 추가 필요
 public class Product {
     
     @Id
@@ -73,11 +74,6 @@ public class Product {
     private LocalDateTime createdAt;
     @LastModifiedDate
     private LocalDateTime updatedAt;
-
-    // Soft Delete
-    @SoftDelete(columnName = "is_deleted")
-    @Column(nullable = false)
-    private Boolean isDeleted = false;
 
     public ProductResponseDTO toDto(){
         return ProductResponseDTO.builder()
